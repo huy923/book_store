@@ -1,28 +1,3 @@
-# Django Bookstore
-
-This project is a server site rendering (SSR) with django and many third party packages to complete fully understand django and building a complete project with django. This project is a version of the project offered in the book **Django for Professionals Production websites with Python  Django 4.0 (William Vincent)** and is live coded with modifications by me Rvjonh or just Jonh😎.
-
-![Bookstore - Front Page]($project-plus/front-page.png "Front Page of the Application")
-
-The project has:
-
-* UI in many templates
-    1. Home Page
-    2. About Page
-    3. Search Filter Dor Books
-    4. Books By User (Publisher)
-    5. Full User Authentication Pages
-* Many routes rendered in backend
-* Models a CustomUsers, Book and their Reviews
-* User Account management
-* CRUD operations in models after metioned
-* Pagination in Books Sections and Reviews Sections
-* Mention Third Party Libraries:
-    1. [django-crispy-forms](https://django-crispy-forms.readthedocs.io/en/latest/)
-    2. [django-allauth](https://django-crispy-forms.readthedocs.io/en/latest/)
-    3. For branch render-deploy-with-googledrive
-        1. [Django Google Drive Storage](https://django-googledrive-storage.readthedocs.io/en/latest/)
-
 ## Local Development
 
 Follow every command below to put it running in your machine

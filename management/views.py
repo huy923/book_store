@@ -12,7 +12,7 @@ import datetime
 def index(request):
     return render(
         request,
-        'index.php',
+        'index.html',
     )
 
 
@@ -20,7 +20,7 @@ def index(request):
 def BookListView(request):
     book_list = Book.objects.all()
     # MODELNAME.objects.all() is used to get all objects i.e. tuples from database
-    return render(request, 'catalog/book_list.php', locals())
+    return render(request, 'catalog/book_list.html', locals())
 
 @login_required
 def student_BookListView(request):
@@ -30,7 +30,7 @@ def student_BookListView(request):
     for b in bor:
         book_list.append(b.book)
     # MODELNAME.objects.all() is used to get all objects i.e. tuples from database
-    return render(request, 'catalog/book_list.php', locals())
+    return render(request, 'catalog/book_list.html', locals())
 
 #This view return detail of a particular book
 #it also accepts a parameter pk that is the id  i.e. primary_key of book to identify it
@@ -44,7 +44,7 @@ def BookDetailView(request, pk):
         rr=Reviews.objects.get(review="none")
     except:
         pass
-    return render(request, 'catalog/book_detail.php', locals())
+    return render(request, 'catalog/book_detail.html', locals())
 
 
 
@@ -58,7 +58,7 @@ def BookCreate(request):
         if form.is_valid():
             form.save()
             return redirect(index)
-    return render(request, 'catalog/form.php', locals())
+    return render(request, 'catalog/form.html', locals())
 
 
 @login_required
@@ -73,7 +73,7 @@ def BookUpdate(request, pk):
             obj = form.save(commit=False)
             obj.save()
             return redirect(index)
-    return render(request, 'catalog/form.php', locals())
+    return render(request, 'catalog/form.html', locals())
 
 
 @login_required
@@ -104,7 +104,7 @@ def student_request_issue(request, pk):
         a.save()
     else:
         message = "you have exceeded limit."
-    return render(request, 'catalog/result.php', locals())
+    return render(request, 'catalog/result.html', locals())
 
 
 @login_required
@@ -122,7 +122,7 @@ def StudentCreate(request):
             u.email=s.email
             u.save()
             return redirect(index)
-    return render(request, 'catalog/form.php', locals())
+    return render(request, 'catalog/form.html', locals())
 
 
 @login_required
@@ -137,7 +137,7 @@ def StudentUpdate(request, pk):
             obj = form.save(commit=False)
             obj.save()
             return redirect(index)
-    return render(request, 'catalog/form.php', locals())
+    return render(request, 'catalog/form.html', locals())
 
 
 @login_required
@@ -149,13 +149,13 @@ def StudentDelete(request, pk):
 @login_required
 def StudentList(request):
     students = Student.objects.all()
-    return render(request, 'catalog/student_list.php', locals())
+    return render(request, 'catalog/student_list.html', locals())
 
 @login_required
 def StudentDetail(request, pk):
     student = get_object_or_404(Student, id=pk)
     books=Borrower.objects.filter(student=student)
-    return render(request, 'catalog/student_detail.php', locals())
+    return render(request, 'catalog/student_detail.html', locals())
 
 
 
@@ -227,7 +227,7 @@ def search_book(request):
 
         book_list= Book.objects.filter(entry_query)
 
-    return render(request,'catalog/book_list.php',locals() )
+    return render(request,'catalog/book_list.html',locals() )
 def search_student(request):
     query_string = ''
     found_entries = None
@@ -238,7 +238,7 @@ def search_student(request):
 
         students= Student.objects.filter(entry_query)
 
-    return render(request,'catalog/student_list.php',locals())
+    return render(request,'catalog/student_list.html',locals())
 
 
 
@@ -253,7 +253,7 @@ def RatingUpdate(request, pk):
             obj = form.save(commit=False)
             obj.save()
             return redirect('book-detail',pk=obj.book.id)
-    return render(request, 'catalog/form.php', locals())
+    return render(request, 'catalog/form.html', locals())
 
 
 @login_required

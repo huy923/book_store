@@ -1,4 +1,4 @@
-{% extends 'base_generic.php' %}
+{% extends 'base_generic.html' %}
 {% block style %}
 .product-title, .product-description, .price, .vote, .sizes {
 margin-bottom: 15px; }
@@ -11,8 +11,8 @@ margin-bottom: 15px; }
             <div class="preview col-6">
 
                 <div class="preview-pic tab-content">
-                    <div class="tab-pane active  my-auto mx-auto" id="pic-1"><img
-                            src="{{ student.pic.url }}" height="200" width="200" />
+                    <div class="tab-pane active  my-auto mx-auto" id="pic-1"><img src="{{ student.pic.url }}"
+                            height="200" width="200" />
                     </div>
                 </div>
 

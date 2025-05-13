@@ -1,9 +1,9 @@
-{% extends 'base_generic.html' %}
+{% extends 'base_generic.php' %}
 
 {% block title %}Forgot Your Password?{% endblock %}
 
 {% block content %}
-    <div class="bg bg-white">
+<div class="bg bg-white">
   <h1>Forgot your password?</h1>
   <p>Enter your email address below, and we'll email instructions for setting a new one.</p>
 

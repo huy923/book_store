@@ -1,4 +1,4 @@
-{% extends 'base_generic.html' %}
+{% extends 'base_generic.php' %}
 
 {% block title %}Enter new password{% endblock %}
 

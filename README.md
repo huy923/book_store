@@ -2,19 +2,20 @@
 
 Follow every command below to put it running in your machine
 
-1. Setting Repository in your machine
+1. Setting Repository in your machine but make sure you have Python 3.11 or lower
 
     ```CMD
-    git clone https://github.com/Rvjonh/django_bookstore.git     # clone the repository in the actual dir
-    py -m venv .venv    # creates a python environment
-    .venv\Scripts\activate.bat  # activate the environment (Windows)
+    python -m venv .venv    # creates a python environment
+    .venv\Scripts\activate  # activate the environment (Windows)
+    source .venv/bin/activate  # activate the environment (Linux / MacOS)
     pip install -r requirements.txt     # install dependencies for the project (ej. django)
     ```
 
 2. Configure your local variables (Windows)
 
     ```.ENV
-    copy .env-copy .env     # Make a copy of the file
+    copy .env-copy .env     # Make a copy of the file (Windows)
+    cp .env-copy .env     # Make a copy of the file (Linux / MacOS)
     You need to fill all the variables ... to put it work full correctly
     ```
 
@@ -22,7 +23,7 @@ Follow every command below to put it running in your machine
 
     In this section you will have to create a mysql database and add it to in the file django_project/settings, and modify the DATABASES section, if you have MySQL in your computer will easy, just follow these steps: [How to connect MySQL to Django](https://www.javatpoint.com/how-to-connect-mysql-to-django)
 
-    or just change the DATABASE confi to:
+    or just change the DATABASE confi in the file django_project/settings.py to:
 
     ```CMD
     DATABASES = {

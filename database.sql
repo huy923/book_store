@@ -1,7 +1,6 @@
-drop DATABASE book_store;
+drop DATABASE if not exists book_store;
 CREATE DATABASE book_store;
 USE book_store;
--- 1. Bảng nền
 CREATE TABLE IF NOT EXISTS `django_content_type` (
   `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `app_label` VARCHAR(100) NOT NULL,
@@ -15,13 +14,11 @@ CREATE TABLE IF NOT EXISTS `django_migrations` (
   `applied` DATETIME NOT NULL
 );
 
--- 2. auth_group
 CREATE TABLE IF NOT EXISTS `auth_group` (
   `id` INT AUTO_INCREMENT PRIMARY KEY,
   `name` VARCHAR(150) NOT NULL UNIQUE
 );
 
--- 3. auth_permission (phụ thuộc django_content_type)
 CREATE TABLE IF NOT EXISTS `auth_permission` (
   `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `content_type_id` INT NOT NULL,
@@ -30,7 +27,6 @@ CREATE TABLE IF NOT EXISTS `auth_permission` (
   FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
 );
 
--- 4. accounts_customuser
 CREATE TABLE IF NOT EXISTS `accounts_customuser` (
   `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `password` VARCHAR(128) NOT NULL,
@@ -45,7 +41,6 @@ CREATE TABLE IF NOT EXISTS `accounts_customuser` (
   `date_joined` DATETIME NOT NULL
 );
 
--- 5. account_emailaddress (phụ thuộc accounts_customuser)
 CREATE TABLE IF NOT EXISTS `account_emailaddress` (
   `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `verified` BINARY NOT NULL,
@@ -55,7 +50,6 @@ CREATE TABLE IF NOT EXISTS `account_emailaddress` (
   FOREIGN KEY (`user_id`) REFERENCES `accounts_customuser` (`id`)
 );
 
--- 6. account_emailconfirmation (phụ thuộc account_emailaddress)
 CREATE TABLE IF NOT EXISTS `account_emailconfirmation` (
   `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `created` DATETIME NOT NULL,
@@ -65,7 +59,6 @@ CREATE TABLE IF NOT EXISTS `account_emailconfirmation` (
   FOREIGN KEY (`email_address_id`) REFERENCES `account_emailaddress` (`id`)
 );
 
--- 7. books_book (phụ thuộc accounts_customuser)
 CREATE TABLE IF NOT EXISTS `books_book` (
   `id` CHAR(32) NOT NULL PRIMARY KEY,
   `title` VARCHAR(200) NOT NULL,
@@ -77,7 +70,6 @@ CREATE TABLE IF NOT EXISTS `books_book` (
   FOREIGN KEY (`publisher_id`) REFERENCES `accounts_customuser` (`id`)
 );
 
--- 8. books_review (phụ thuộc books_book, accounts_customuser)
 CREATE TABLE IF NOT EXISTS `books_review` (
   `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `review` VARCHAR(255) NOT NULL,
@@ -88,7 +80,6 @@ CREATE TABLE IF NOT EXISTS `books_review` (
   FOREIGN KEY (`book_id`) REFERENCES `books_book` (`id`)
 );
 
--- 9. django_admin_log (phụ thuộc django_content_type, accounts_customuser)
 CREATE TABLE IF NOT EXISTS `django_admin_log` (
   `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `object_id` TEXT NULL,
@@ -102,7 +93,6 @@ CREATE TABLE IF NOT EXISTS `django_admin_log` (
   FOREIGN KEY (`user_id`) REFERENCES `accounts_customuser` (`id`)
 );
 
--- 10. auth_group_permissions (phụ thuộc auth_group, auth_permission)
 CREATE TABLE IF NOT EXISTS `auth_group_permissions` (
   `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `group_id` INT NOT NULL,
@@ -111,7 +101,6 @@ CREATE TABLE IF NOT EXISTS `auth_group_permissions` (
   FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`)
 );
 
--- 11. accounts_customuser_groups (phụ thuộc accounts_customuser, auth_group)
 CREATE TABLE IF NOT EXISTS `accounts_customuser_groups` (
   `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `customuser_id` INT NOT NULL,
@@ -120,7 +109,6 @@ CREATE TABLE IF NOT EXISTS `accounts_customuser_groups` (
   FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`)
 );
 
--- 12. accounts_customuser_user_permissions (phụ thuộc accounts_customuser, auth_permission)
 CREATE TABLE IF NOT EXISTS `accounts_customuser_user_permissions` (
   `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `customuser_id` INT NOT NULL,
@@ -129,7 +117,6 @@ CREATE TABLE IF NOT EXISTS `accounts_customuser_user_permissions` (
   FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`)
 );
 
--- CREATE TABLE IF NOT EXISTS `django_migrations` (`id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT, `app` VARCHAR(255) NOT NULL, `name` VARCHAR(255) NOT NULL, `applied` DATETIME NOT NULL);
 INSERT INTO django_migrations (`app`, `name`, `applied`) VALUES('contenttypes','0001_initial','2025-05-13 15:00:38.031071');
 INSERT INTO django_migrations (`app`, `name`, `applied`) VALUES('contenttypes','0002_remove_content_type_name','2025-05-13 15:00:38.216118');
 INSERT INTO django_migrations (`app`, `name`, `applied`) VALUES('auth','0001_initial','2025-05-13 15:00:38.598290');
@@ -239,7 +226,6 @@ CREATE INDEX `auth_permission_content_type_id_2f476e4b` ON `auth_permission` (`c
 CREATE UNIQUE INDEX `accounts_customuser_groups_customuser_id_group_id_c074bdcb_uniq` ON `accounts_customuser_groups` (`customuser_id`, `group_id`);
 CREATE INDEX `accounts_customuser_groups_customuser_id_bc55088e` ON `accounts_customuser_groups` (`customuser_id`);
 CREATE INDEX `accounts_customuser_groups_group_id_86ba5f9e` ON `accounts_customuser_groups` (`group_id`);
--- CREATE UNIQUE INDEX `accounts_customuser_user_permissions_customuser_id_permission_id_9632a709_uniq` ON `accounts_customuser_user_permissions` (`customuser_id`, `permission_id`);
 CREATE INDEX `accounts_customuser_user_permissions_customuser_id_0deaefae` ON `accounts_customuser_user_permissions` (`customuser_id`);
 CREATE INDEX `accounts_customuser_user_permissions_permission_id_aea3d0e5` ON `accounts_customuser_user_permissions` (`permission_id`);
 CREATE INDEX `account_emailconfirmation_email_address_id_5b7f8c58` ON `account_emailconfirmation` (`email_address_id`);

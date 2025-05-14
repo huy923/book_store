@@ -99,12 +99,6 @@ DATABASES = {
         "OPTIONS": {"init_command": "SET sql_mode='STRICT_TRANS_TABLES'"},
     }
 }
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
 
 
 # Password validation
@@ -176,7 +170,8 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
-DEFAULT_FROM_EMAIL = "jonhvelasco3@gmail.com"
+DEFAULT_FROM_EMAIL = ""
+# DEFAULT_FROM_EMAIL = "jonhvelasco3@gmail.com"
 
 """ Email Configuration """
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
